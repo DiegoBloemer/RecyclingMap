@@ -1,0 +1,26 @@
+body{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url(/frontend/assets/imgs/Background.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+.login-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.login-card{
+    background-color: rgba(213, 248, 222, 100%);
+    backdrop-filter: blur(5px);
+    border-radius:12px;
+    padding: 25px 35px;
+    text-align: center;
+    width: 400px;
+    color: var(--black);
+}
