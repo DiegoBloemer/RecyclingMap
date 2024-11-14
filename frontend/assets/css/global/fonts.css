@@ -1,0 +1,10 @@
+@font-face {
+    font-family: interBold;
+    src: url(/frontend/assets/fonts/Inter_18pt-Bold.ttf);
+    font-display: swap;
+}
+@font-face {
+    font-family: interRegular;
+    src: url(/frontend/assets/fonts/Inter_18pt-Regular.ttf);
+    font-display: swap;
+}
