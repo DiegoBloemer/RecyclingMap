@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tela de login</title>
+    <title>Tela de Cadastro</title>
     <link rel="stylesheet" href="/frontend/assets/css/pages/login/login.css" />
   </head>
   <body>
@@ -17,18 +17,19 @@
         </div>
         <form>
           <div class="input-field">
-            <input type="email" placeholder="E-mail" required>
+            <input type="email" placeholder="Seu melhor E-mail" required>
           </div>
           <div class="input-field">
-            <input type="password" id="password" placeholder="Senha" required>
+            <input type="password" id="password" placeholder="Insira uma senha" required>
             <img src="/frontend/assets/imgs/eye-off_icon.svg" alt="Mostrar senha" id="togglePassword">
           </div>
-          <div class="options">
-            <a href="">Esqueceu a senha?</a>
+          <div class="input-field">
+            <input type="password" id="repeat_password" placeholder="Repita sua senha" required>
+            <img src="/frontend/assets/imgs/eye-off_icon.svg" alt="Mostrar senha" id="togglePassword_2">
           </div>
-          <button type="submit">Login</button>
+          <button type="submit">Cadastrar-se</button>
         </form>
-        <p class="registrar_se">Não possui conta? <a href="/register.html">Registre-se</a></p>
+        <p class="registrar_se">Já possui conta? <a href="/login.html">Login</a></p>
       </div>
     </section>
     <script src="/frontend/js/olho-magico.js"></script>
