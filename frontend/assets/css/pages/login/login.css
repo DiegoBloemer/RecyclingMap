@@ -1,2 +1,2 @@
-@import "/frontend/assets/css/global/global.css";
-@import url(/frontend/assets/css/pages/login/partials/section-1.css);
+@import "../../global/global.css";
+@import "./partials/section-1.css";

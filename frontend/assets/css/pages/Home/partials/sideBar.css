@@ -6,6 +6,7 @@
     color: var(--darker-green);
     display: inline-flex;
     flex-direction: column;
+    z-index: 9; 
 }
 
 .sideBar-menu .close{

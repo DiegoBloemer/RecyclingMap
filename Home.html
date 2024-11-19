@@ -1,40 +1,146 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home</title>
-    <link rel="stylesheet" href="/frontend/assets/css/pages/Home/home.css">
-</head>
-<body>
-    <aside class = "sideBar-menu">
-        <div class="close">
-            <img src="/frontend/assets/imgs/x.svg" alt="Close" width="24" height="25">
-        </div>
-        <a href="" class="container-logo" >
-            <img src="/frontend/assets/imgs/Logo.svg" alt="RecyclingMap" width="200" height="75">
-        </a>
-        <ul class="nav-links">
-            <li>
-                <a href="#" class="selected">
-                    <img src="/frontend/assets/imgs/saves.svg" alt="Saves" width="20" height="25">
-                    <span class="nav-text">Salvos</span>
-                </a>
-            </li>
-            <li>
-                <a href="#" class="selected">
-                    <img src="/frontend/assets/imgs/recently.svg" alt="Recently" width="22" height="22">
-                    <span class="nav-text">Recentes</span>
-                </a>
-            </li>
-            <li>
-                <a href="#"class="selected">
-                    <img src="/frontend/assets/imgs/add_new.svg" alt="Add New Local" width="22" height="22">
-                    <span class="nav-text">Adicionar novos locais</span>
-                </a>
-            </li>
-        </ul>
-    </aside>
+    <link rel="stylesheet" href="./frontend/assets/css/pages/Home/home.css" />
+    <script>
+      ((g) => {
+        var h,
+          a,
+          k,
+          p = "The Google Maps JavaScript API",
+          c = "google",
+          l = "importLibrary",
+          q = "__ib__",
+          m = document,
+          b = window;
+        b = b[c] || (b[c] = {});
+        var d = b.maps || (b.maps = {}),
+          r = new Set(),
+          e = new URLSearchParams(),
+          u = () =>
+            h ||
+            (h = new Promise(async (f, n) => {
+              await (a = m.createElement("script"));
+              e.set("libraries", [...r] + "");
+              for (k in g)
+                e.set(
+                  k.replace(/[A-Z]/g, (t) => "_" + t[0].toLowerCase()),
+                  g[k]
+                );
+              e.set("callback", c + ".maps." + q);
+              a.src = `https://maps.${c}apis.com/maps/api/js?` + e;
+              d[q] = f;
+              a.onerror = () => (h = n(Error(p + " could not load.")));
+              a.nonce = m.querySelector("script[nonce]")?.nonce || "";
+              m.head.append(a);
+            }));
+        d[l]
+          ? console.warn(p + " only loads once. Ignoring:", g)
+          : (d[l] = (f, ...n) => r.add(f) && u().then(() => d[l](f, ...n)));
+      })({
+        key: "AIzaSyAODeSdbP9IawnfN9YT1vFR2paURWLRpC8",
+        v: "weekly",
+        // Use the 'v' parameter to indicate the version to use (weekly, beta, alpha, etc.).
+        // Add other bootstrap parameters as needed, using camel case.
+      });
+    </script>
+    <script src="./frontend/js/Home.js"></script>
+  </head>
+  <body>
     
-</body>
+    <main class="bg-main">
+      <div class="layout-container">
+        <aside class="sideBar-menu">
+          <div class="close">
+            <img
+              src="/frontend/assets/imgs/x.svg"
+              alt="Close"
+              width="24"
+              height="25"
+            />
+          </div>
+          <a href="" class="container-logo">
+            <img
+              src="/frontend/assets/imgs/Logo.svg"
+              alt="RecyclingMap"
+              width="200"
+              height="75"
+            />
+          </a>
+          <ul class="nav-links">
+            <li>
+              <a href="#" class="selected">
+                <img
+                  src="/frontend/assets/imgs/saves.svg"
+                  alt="Saves"
+                  width="20"
+                  height="25"
+                />
+                <span class="nav-text">Salvos</span>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="selected">
+                <img
+                  src="/frontend/assets/imgs/recently.svg"
+                  alt="Recently"
+                  width="22"
+                  height="22"
+                />
+                <span class="nav-text">Recentes</span>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="selected">
+                <img
+                  src="/frontend/assets/imgs/add_new.svg"
+                  alt="Add New Local"
+                  width="22"
+                  height="22"
+                />
+                <span class="nav-text">Adicionar novos locais</span>
+              </a>
+            </li>
+          </ul>
+        </aside>
+        <section class="main-content">
+            <div class="navigationBar">
+              <div class="container-user" onclick="toggleModal()">
+                <div class="user-image">
+                    <img src="./frontend/assets/imgs/user-image.png" alt="User-Image" />
+                </div>
+              </div>
+            </div>
+            <div class="user-modal" id="userModal">
+              <div class="user-modal-content">
+                <p>Olá, Diego Bloemer!</p>
+                <div id="user-modal-icone">
+                  <img src="./frontend/assets/imgs/icone-user-modal.svg" alt="Ícone do Usuário">
+                </div>
+                <div class="logout-btn">
+                  <a href="./login.html">
+                    <img src="./frontend/assets/imgs/logout_icon.svg" alt="Logout Icon">
+                    <div>
+                      <span>Sair</span>
+                    </div>
+                  </a>
+                </div>
+                <div id="user-modal-logo">
+                  <img src="./frontend/assets/imgs/Logo.svg" alt="Logo">
+                </div>
+              </div>
+            </div>
+            <div id="map"></div>
+          <!-- prettier-ignore -->
+          <script>(g=>{var h,a,k,p="The Google Maps JavaScript API",c="google",l="importLibrary",q="__ib__",m=document,b=window;b=b[c]||(b[c]={});var d=b.maps||(b.maps={}),r=new Set,e=new URLSearchParams,u=()=>h||(h=new Promise(async(f,n)=>{await (a=m.createElement("script"));e.set("libraries",[...r]+"");for(k in g)e.set(k.replace(/[A-Z]/g,t=>"_"+t[0].toLowerCase()),g[k]);e.set("callback",c+".maps."+q);a.src=`https://maps.${c}apis.com/maps/api/js?`+e;d[q]=f;a.onerror=()=>h=n(Error(p+" could not load."));a.nonce=m.querySelector("script[nonce]")?.nonce||"";m.head.append(a)}));d[l]?console.warn(p+" only loads once. Ignoring:",g):d[l]=(f,...n)=>r.add(f)&&u().then(()=>d[l](f,...n))})
+              ({key: "AIzaSyAODeSdbP9IawnfN9YT1vFR2paURWLRpC8", v: "weekly"});
+          </script>
+      </div>
+    </main>
+    <script src="./frontend/js/UserModal.js"></script>
+  </body>
 </html>
+

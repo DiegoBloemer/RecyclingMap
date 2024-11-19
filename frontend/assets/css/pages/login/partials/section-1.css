@@ -3,7 +3,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: url(/frontend/assets/imgs/Background.png);
+  background-image: url(../../../../imgs/Background.png);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;

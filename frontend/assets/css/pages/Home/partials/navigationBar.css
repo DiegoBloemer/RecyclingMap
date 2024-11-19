@@ -1,0 +1,23 @@
+.navigationBar {
+  position: absolute;
+  top: 8px; /* Alinha ao topo */
+  right: 56px; /* Alinha à direita */
+  display: flex;
+  justify-content: flex-end;
+  align-items: center; 
+  padding: 10px 20px; 
+  background: transparent; 
+  z-index: 10; /* Garante que fique sobre os outros elementos */
+}
+
+.navigationBar .container-user {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.navigationBar .user-image img {
+  width: 40px; 
+  height: 40px;
+  border-radius: 50%; /
+}
