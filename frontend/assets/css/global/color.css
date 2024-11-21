@@ -2,7 +2,10 @@
     --black: #000000;
     --more-light: #F2FDF5;
     --light: #ebfcef;
+    --light-active: #d5f8de;
     --normal-green: #78E996;
-    --darker-green: #2a5235;
+    --normal-hover: #6cd287;
+    --normal-active: #60ba78;
     --green-hover: #366944;
+    --darker-green: #2a5235;
 }
