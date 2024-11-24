@@ -41,7 +41,7 @@
           ? console.warn(p + " only loads once. Ignoring:", g)
           : (d[l] = (f, ...n) => r.add(f) && u().then(() => d[l](f, ...n)));
       })({
-        key: "---",
+        key: "Your-Api-key",
         v: "weekly",
         // Use the 'v' parameter to indicate the version to use (weekly, beta, alpha, etc.).
         // Add other bootstrap parameters as needed, using camel case.
@@ -100,6 +100,10 @@
         </aside>
         <section class="main-content">
             <div class="navigationBar">
+              <div class="search-bar">
+                <svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><g><path d="M21.53 20.47l-3.66-3.66C19.195 15.24 20 13.214 20 11c0-4.97-4.03-9-9-9s-9 4.03-9 9 4.03 9 9 9c2.215 0 4.24-.804 5.808-2.13l3.66 3.66c.147.146.34.22.53.22s.385-.073.53-.22c.295-.293.295-.767.002-1.06zM3.5 11c0-4.135 3.365-7.5 7.5-7.5s7.5 3.365 7.5 7.5-3.365 7.5-7.5 7.5-7.5-3.365-7.5-7.5z"></path></g></svg>
+                <input placeholder="Search" type="search" class="input">
+              </div>
               <div class="container-user" onclick="UserModal()">
                 <div class="user-image">
                     <img src="./frontend/assets/imgs/user-image.png" alt="User-Image" />
@@ -148,17 +152,17 @@
                       
                   <label>
                       <input class="input"  placeholder="" required="">
-                      <span>Tipo de resíduo</span>
+                      <span>Tipo de resíduo *</span>
                   </label>
-                  <form class="file-form">
+                  <div class="file-form">
                     <label for="file-input" class="file-drop-container">
                     <span class="file-drop-title">Drop files here</span>
                     or
                     <input type="file" accept="image/png,image/jpeg,video/mp4" multiple="" required="" id="file-input">
                   </label>  
-                  </form>
+                </div>
                   <div class="submit-container">
-                    <button class="submit">Submit</button>
+                    <button class="submit" type="submit">Submit</button>
                   </div>
                  </div>  
                 </form>
@@ -169,4 +173,3 @@
     <script src="./frontend/js/Modais.js"></script>
   </body>
 </html>
-

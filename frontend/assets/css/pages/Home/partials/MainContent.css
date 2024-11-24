@@ -278,12 +278,11 @@
 
 
 /*
- Input de aequivos
+ Input de arquivos
 */
 
 .file-form {
   background-color: var(--more-light);
-  border: 1px solid var(--darker-green);
   border-radius: 20px;
   padding: 2rem .7rem .7rem .7rem;
   text-align: center;
