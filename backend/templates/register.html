@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tela de Cadastro</title>
+    <link rel="stylesheet" href="{% static 'frontend/assets/css/pages/login/login.css' %}" />
+  <body>
+    <section class="login-container">
+      <div class="login-card">
+        <div class="logo">
+          <img src="{% static '../static/frontend/assets/imgs/logo.svg' %}" alt="Logo">
+        </div>
+        <div class="icon">
+          <img src="{% static '../static/frontend/assets/imgs/log-in_icon.svg' %}" alt="Login_icon">
+        </div>
+        <form>
+          <div class="input-field">
+            <input type="email" placeholder="Seu melhor E-mail" required>
+          </div>
+          <div class="input-field">
+            <input type="password" id="password" placeholder="Insira uma senha" required>
+            <img src="{% static 'frontend/assets/imgs/eye-off_icon.svg' %}" alt="Mostrar senha" id="togglePassword"
+           data-eye-icon="{% static 'frontend/assets/imgs/eye_icon.svg' %}"
+           data-eye-off-icon="{% static 'frontend/assets/imgs/eye-off_icon.svg' %}">
+          </div>
+          <div class="input-field">
+            <input type="password" id="repeat_password" placeholder="Repita sua senha" required>
+            <img src="{% static 'frontend/assets/imgs/eye-off_icon.svg' %}" alt="Mostrar senha" id="togglePassword_2"
+           data-eye-icon="{% static 'frontend/assets/imgs/eye_icon.svg' %}"
+           data-eye-off-icon="{% static 'frontend/assets/imgs/eye-off_icon.svg' %}">
+          </div>
+          <button type="submit">Cadastrar-se</button>
+        </form>
+        <p class="registrar_se">Já possui conta? <a href="{% url 'login' %}">Login</a></p>
+      </div>
+    </section>
+    <script src="{% static 'frontend/js/olho-magico.js' %}"></script>
+  </body>
+</html>
+<a href="{% url 'login' %}"></a>

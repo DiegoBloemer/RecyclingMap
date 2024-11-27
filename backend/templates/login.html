@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tela de login</title>
+    <link rel="stylesheet" href="{% static 'frontend/assets/css/pages/login/login.css' %}" />
+  </head>
+  <body>
+    <section class="login-container">
+      <div class="login-card">
+        <div class="logo">
+          <img src="{% static '../static/frontend/assets/imgs/logo.svg' %}" alt="Logo">
+        </div>
+        <div class="icon">
+          <img src="{% static '../static/frontend/assets/imgs/log-in_icon.svg' %}" alt="Login_icon">
+        </div>
+        <form>
+          <div class="input-field">
+            <input type="email" placeholder="E-mail" required>
+          </div>
+          <div class="input-field">
+            <input type="password" id="password" placeholder="Senha" required>
+            <img src="{% static 'frontend/assets/imgs/eye-off_icon.svg' %}" alt="Mostrar senha" id="togglePassword"
+           data-eye-icon="{% static 'frontend/assets/imgs/eye_icon.svg' %}"
+           data-eye-off-icon="{% static 'frontend/assets/imgs/eye-off_icon.svg' %}">
+          </div>
+          <div class="options">
+            <a href="">Esqueceu a senha?</a>
+          </div>
+          <button type="submit"></a>Login</button>
+        </form>
+        <p class="registrar_se">Não possui conta? <a href="{% url 'register' %}">Registre-se</a></p>
+      </div>
+    </section>
+    <script src="{% static 'frontend/js/olho-magico.js' %}"></script>
+  </body>
+</html>
