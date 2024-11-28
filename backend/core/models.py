@@ -32,3 +32,10 @@ class Imagem(models.Model):
     
     def __str__(self):
         return f"Imagem {self.id}"
+
+class User(models.Model):
+    email = models.EmailField(unique=True)
+    password = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.email

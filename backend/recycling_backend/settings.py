@@ -49,6 +49,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'recycling_backend.middlewares.authMiddleware.AuthRedirectMiddleware',
 ]
 
 ROOT_URLCONF = 'recycling_backend.urls'
@@ -106,6 +107,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
 LANGUAGE_CODE = 'pt-br'
+
+LOGIN_URL = '/login/'  # Página de login
+REGISTER_URL = '/register/'  # Página de registro
 
 TIME_ZONE = 'America/Sao_Paulo'
 

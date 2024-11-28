@@ -1,19 +1,30 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import LocalReciclagem, Imagem
-from .forms import LocalReciclagemForm, ImagemForm
+from .models import LocalReciclagem, Imagem, TipoResiduo
+from django.contrib.auth.models import User
+from .forms import LocalReciclagemForm, ImagemForm, RegisterForm
 from django.shortcuts import get_object_or_404
-from .models import TipoResiduo
+from django.contrib import messages
+from django.contrib.auth import authenticate, login
+
 
 # Create your views here.
-
-
 def home(request):
     tipos_residuos = TipoResiduo.objects.all()
     return render(request, 'home.html', {'tipos_residuos': tipos_residuos})
 
 def login_view(request):
-    return render(request, 'login.html')
+    if request.method == 'POST':
+        username = request.POST['username']  # Captura o e-mail inserido
+        password = request.POST['password']  # Captura a senha inserida
+        user = authenticate(request, username=username, password=password)
+        
+        if user is not None:
+            login(request, user)
+            return redirect('home')  # Substitua 'home' pela página inicial após o login
+        else:
+            messages.error(request, "E-mail ou senha inválidos.")  # Exibe mensagem de erro
+    return render(request, 'login.html')  # Renderiza o template de login
 
 def register_view(request):
     return render(request, 'register.html')
@@ -52,3 +63,24 @@ def adicionar_local(request):
             return HttpResponse("Erro no formulário.", status=400)
 
     return render(request, 'adicionar_local.html')
+
+
+def register_view(request):
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data['email']
+            password = form.cleaned_data['password']
+
+            # Verificar se o usuário já existe
+            if User.objects.filter(email=email).exists():
+                messages.error(request, "Esse e-mail já está cadastrado.")
+            else:
+                # Criar o usuário
+                User.objects.create_user(username=email, email=email, password=password)
+                messages.success(request, "Usuário registrado com sucesso!")
+                return redirect('login')  # Redirecionar para a página de login
+    else:
+        form = RegisterForm()
+
+    return render(request, 'register.html', {'form': form})

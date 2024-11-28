@@ -15,24 +15,29 @@
         <div class="icon">
           <img src="{% static '../static/frontend/assets/imgs/log-in_icon.svg' %}" alt="Login_icon">
         </div>
-        <form>
+        <form method="post">
+          {% csrf_token %}
+          
           <div class="input-field">
-            <input type="email" placeholder="Seu melhor E-mail" required>
+              {{ form.email }} <!-- Gera o campo de e-mail com suas estilizações -->
           </div>
+      
           <div class="input-field">
-            <input type="password" id="password" placeholder="Insira uma senha" required>
-            <img src="{% static 'frontend/assets/imgs/eye-off_icon.svg' %}" alt="Mostrar senha" id="togglePassword"
-           data-eye-icon="{% static 'frontend/assets/imgs/eye_icon.svg' %}"
-           data-eye-off-icon="{% static 'frontend/assets/imgs/eye-off_icon.svg' %}">
+              {{ form.password }} <!-- Gera o campo de senha -->
+              <img src="{% static 'frontend/assets/imgs/eye-off_icon.svg' %}" alt="Mostrar senha" id="togglePassword"
+                   data-eye-icon="{% static 'frontend/assets/imgs/eye_icon.svg' %}"
+                   data-eye-off-icon="{% static 'frontend/assets/imgs/eye-off_icon.svg' %}">
           </div>
+      
           <div class="input-field">
-            <input type="password" id="repeat_password" placeholder="Repita sua senha" required>
-            <img src="{% static 'frontend/assets/imgs/eye-off_icon.svg' %}" alt="Mostrar senha" id="togglePassword_2"
-           data-eye-icon="{% static 'frontend/assets/imgs/eye_icon.svg' %}"
-           data-eye-off-icon="{% static 'frontend/assets/imgs/eye-off_icon.svg' %}">
+              {{ form.repeat_password }} <!-- Gera o campo de confirmação de senha -->
+              <img src="{% static 'frontend/assets/imgs/eye-off_icon.svg' %}" alt="Mostrar senha" id="togglePassword_2"
+                   data-eye-icon="{% static 'frontend/assets/imgs/eye_icon.svg' %}"
+                   data-eye-off-icon="{% static 'frontend/assets/imgs/eye-off_icon.svg' %}">
           </div>
+      
           <button type="submit">Cadastrar-se</button>
-        </form>
+      </form>
         <p class="registrar_se">Já possui conta? <a href="{% url 'login' %}">Login</a></p>
       </div>
     </section>
