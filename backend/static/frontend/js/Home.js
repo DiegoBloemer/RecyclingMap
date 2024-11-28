@@ -12,35 +12,30 @@ async function initMap() {
 
 
 
-// const forms = document.getElementById("localForm");
+  fetch("/pontos/")
+  .then((response) => response.json())
+  .then((data) => {
+      data.forEach((ponto) => {
+          const marker = new google.maps.Marker({
+              position: { lat: parseFloat(ponto.latitude), lng: parseFloat(ponto.longitude) },
+              map: map,
+              title: ponto.nome,
+          });
 
-// forms.addEventListener("submit", (event) => {
-//   event.preventDefault();
-//   const formData = new FormData(forms);
-//   const data = Object.fromEntries(formData.entries());
-//   console.log(data);
+          // Opcional: Adicionar uma janela de informações
+          const infoWindow = new google.maps.InfoWindow({
+              content: `
+                  <h3>${ponto.nome}</h3>
+                  <p>${ponto.endereco}</p>
+                  <p>Tipo de Resíduo: ${ponto.tipo_residuo}</p>
+              `,
+          });
 
-//   const newLocationForMap = document.createElement("div");
-
-//   // Adiciona a classe ao elemento
-//   newLocationForMap.classList.add("newLocationForMap");
-
-//   // Define o conteúdo do elemento
-//   newLocationForMap.textContent = "Nova localização";
-
-//   // Aplica estilos diretamente via JavaScript
-//   newLocationForMap.style.backgroundColor = "#4286f5";
-//   newLocationForMap.style.borderRadius = "8px";
-//   newLocationForMap.style.color = "#ffffff";
-//   newLocationForMap.style.fontSize = "14px";
-//   newLocationForMap.style.padding = "10px 15px";
-//   newLocationForMap.style.position = "relative";
-
-//   new AdvancedMarkerElement({
-//     map,
-//     position: { lat: -28.953863171992705, lng: -49.50189008724842 },
-//     content: newLocationForMap,
-//   });
-// });
+          marker.addListener("click", () => {
+              infoWindow.open(map, marker);
+          });
+      });
+  })
+  .catch((error) => console.error("Erro ao carregar os pontos:", error));
 }
 initMap();

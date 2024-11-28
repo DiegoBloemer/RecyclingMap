@@ -1,14 +1,15 @@
-from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.shortcuts import render, redirect, get_object_or_404
+from django.http import HttpResponse, JsonResponse
 from .models import LocalReciclagem, Imagem, TipoResiduo
 from django.contrib.auth.models import User
 from .forms import LocalReciclagemForm, ImagemForm, RegisterForm
-from django.shortcuts import get_object_or_404
 from django.contrib import messages
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 
 
 # Create your views here.
+
+# Função para renderizar a página inicial
 def home(request):
     tipos_residuos = TipoResiduo.objects.all()
     return render(request, 'home.html', {'tipos_residuos': tipos_residuos})
@@ -29,6 +30,12 @@ def login_view(request):
 def register_view(request):
     return render(request, 'register.html')
 
+# Função para logout do usuário
+
+def logout_view(request):
+    logout(request)
+    return redirect('login')  # Redireciona para a página de login
+
 
 # Função para adicionar um local de reciclagem
 def adicionar_local(request):
@@ -39,7 +46,7 @@ def adicionar_local(request):
 
         # Criar um formulário com base nos dados enviados
         local_form = LocalReciclagemForm({
-            'nome': request.POST.get('nome'),
+            'nome': request.POST.get('name'),
             'latitude': request.POST.get('latitude'),
             'longitude': request.POST.get('longitude'),
             'endereco': request.POST.get('endereco'),
@@ -56,8 +63,9 @@ def adicionar_local(request):
             # Salvar imagens associadas ao local
             for imagem in imagens:
                 img_obj = Imagem.objects.create(imagem=imagem)
-                local.imagens.add(img_obj)  # Vincular a imagem ao local
-            
+                local.imagens.add(img_obj)
+            local.save()  # Salve a associação ManyToManyField após adicionar imagens     
+            messages.success(request, "Local de reciclagem adicionado com sucesso!")
             return redirect('home')  # Redireciona após sucesso
         else:
             return HttpResponse("Erro no formulário.", status=400)
@@ -84,3 +92,19 @@ def register_view(request):
         form = RegisterForm()
 
     return render(request, 'register.html', {'form': form})
+
+# Função para buscar os locais de reciclagem (json)
+
+def pontos_coleta(request):
+    pontos = LocalReciclagem.objects.all()
+    data = [
+        {
+            "nome": ponto.nome,
+            "latitude": ponto.latitude,
+            "longitude": ponto.longitude,
+            "endereco": ponto.endereco,
+            "tipo_residuo": ponto.tipo_residuo.nome,
+        }
+        for ponto in pontos
+    ]
+    return JsonResponse(data, safe=False)
