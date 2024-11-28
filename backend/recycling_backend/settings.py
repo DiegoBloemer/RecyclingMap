@@ -126,5 +126,8 @@ STATICFILES_DIRS = [BASE_DIR / 'static']
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-import sys
-print(f"TEMPLATE DIRS: { [str(dir) for dir in TEMPLATES[0]['DIRS']] }", file=sys.stderr)
+APPEND_SLASH = False
+
+# upload e armazenamento de imagens
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
