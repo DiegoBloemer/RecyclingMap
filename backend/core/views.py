@@ -5,6 +5,8 @@ from django.contrib.auth.models import User
 from .forms import LocalReciclagemForm, ImagemForm, RegisterForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
+from django.db.models import Q
+from django.views.decorators.csrf import csrf_exempt
 
 
 # Create your views here.
@@ -93,18 +95,44 @@ def register_view(request):
 
     return render(request, 'register.html', {'form': form})
 
-# Função para buscar os locais de reciclagem (json)
+# Função para inicializar os marcadores já adicionados (locais de reciclagem)
+
+from django.http import JsonResponse
 
 def pontos_coleta(request):
-    pontos = LocalReciclagem.objects.all()
-    data = [
-        {
-            "nome": ponto.nome,
-            "latitude": ponto.latitude,
-            "longitude": ponto.longitude,
-            "endereco": ponto.endereco,
-            "tipo_residuo": ponto.tipo_residuo.nome,
-        }
-        for ponto in pontos
-    ]
-    return JsonResponse(data, safe=False)
+    locais = LocalReciclagem.objects.prefetch_related('imagens').all()
+    dados = []
+    for local in locais:
+        imagens_urls = [imagem.imagem.url for imagem in local.imagens.all()]
+        dados.append({
+            'nome': local.nome,
+            'endereco': local.endereco,
+            'latitude': local.latitude,
+            'longitude': local.longitude,
+            'tipo_residuo': local.tipo_residuo.nome,  # Ajuste se necessário
+            'imagens': imagens_urls,
+        })
+    return JsonResponse(dados, safe=False)
+
+# Função para buscar os pontos pelos filtros de tipo de resíduo e endereço
+
+def buscar_pontos(request):
+    termo_busca = request.GET.get('search', '')  # Captura o termo de busca da URL
+    pontos = LocalReciclagem.objects.filter(
+        Q(endereco__icontains=termo_busca) | Q(tipo_residuo__nome__icontains=termo_busca)
+    ).prefetch_related('imagens')
+
+    resultados = []
+    for ponto in pontos:
+        imagens_urls = [request.build_absolute_uri(imagem.imagem.url) for imagem in ponto.imagens.all()]
+        resultados.append({
+            'nome': ponto.nome,
+            'endereco': ponto.endereco,
+            'latitude': ponto.latitude,
+            'longitude': ponto.longitude,
+            'tipo_residuo': ponto.tipo_residuo.nome,
+            'imagens': imagens_urls,
+        })
+
+    return JsonResponse(resultados, safe=False)
+
